@@ -15,7 +15,7 @@ while True:
     user_input = input("User: ")
 
     # Check if the user wants to exit
-    if user_input.lower() == "x-exit":
+    if user_input.lower() == "exit":
         break
 
     # Generate text
