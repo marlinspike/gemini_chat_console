@@ -1,0 +1,35 @@
+import google.generativeai as genai
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+api_key = api_key = os.getenv("GEMINI_API_KEY")
+# Set the API key
+genai.configure(api_key=api_key)
+
+model = genai.GenerativeModel('gemini-pro')
+chat = model.start_chat(history=[])
+
+# Start the chat loop
+while True:
+    # Get the user's input
+    user_input = input("User: ")
+
+    # Check if user wants to print the history
+    if user_input.lower() == "x-history":
+        print("\n\n--------------\n\n")
+        print(chat.history)
+        print("\n\n--------------\n\n")
+        continue
+    # Check if the user wants to exit
+    if user_input.lower() == "x-exit":
+        break
+
+    # Generate text
+    response = chat.send_message(user_input)
+
+    # Print the generated text
+    print("Gemini:", response.candidates[0].content.parts[0].text)
+
+# Print a goodbye message
+print("Goodbye!")
